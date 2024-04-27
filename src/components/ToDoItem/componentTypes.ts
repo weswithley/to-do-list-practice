@@ -8,6 +8,7 @@ export type DisabledType = boolean;
 
 export type OnInputChangeType = (event: React.ChangeEvent<HTMLInputElement>) => void;
 export type OnCheckboxChangeType = () => void;
+export type onDeleteClickType = () => void;
 
 export interface ComponentInterface {
   className?: ClassNameType;
@@ -17,4 +18,5 @@ export interface ComponentInterface {
   disabled: DisabledType;
   onInputChange: OnInputChangeType;
   onCheckboxChange: OnCheckboxChangeType;
+  onDeleteClick: onDeleteClickType;
 }

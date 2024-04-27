@@ -1,4 +1,9 @@
+// Packages
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+// SCSS
 import componentStyle from './componentStyle.module.scss';
 
 // Component
@@ -22,7 +27,8 @@ const ToDoItem: React.FC<ComponentInterface> = ({
   checked,
   disabled,
   onInputChange,
-  onCheckboxChange
+  onCheckboxChange,
+  onDeleteClick
 }) => {
 
   const componentClassName: string = getClassNames([
@@ -48,6 +54,10 @@ const ToDoItem: React.FC<ComponentInterface> = ({
           disabled,
           onChange: onInputChange
         }}
+      />
+      <FontAwesomeIcon
+        icon={faTrash}
+        onClick={onDeleteClick}
       />
     </div>
   )
