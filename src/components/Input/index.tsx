@@ -14,7 +14,9 @@ import {
 const Input: React.FC<ComponentInterface> = ({
   className,
   styles,
+  inputType,
   value,
+  placeholder,
   disabled,
   onChange
 }) => {
@@ -27,11 +29,13 @@ const Input: React.FC<ComponentInterface> = ({
   return (
     <input
       {...{
-          className: componentClassName,
-          style: styles || {},
-          value,
-          disabled,
-          onChange
+        className: componentClassName,
+        style: styles || {},
+        type: inputType || 'text',
+        value,
+        placeholder,
+        disabled,
+        onChange
       }}
     />
   )
