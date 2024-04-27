@@ -1,0 +1,16 @@
+.componentButton {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #777;
+  min-width: 50px;
+  padding: 7px 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color, .3s;
+
+  &:hover{
+    background-color: #d7d7d7;
+    border: 1px solid #ccc;
+    transition: background-color, .5s;
+  }
+}

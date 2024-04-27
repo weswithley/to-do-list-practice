@@ -1,4 +1,9 @@
 .componentToDoItem {
   display: flex;
   align-items: center;
+  flex: auto;
+  :global(.svg-inline--fa){
+    cursor: pointer;
+    color: #333;
+  }
 }

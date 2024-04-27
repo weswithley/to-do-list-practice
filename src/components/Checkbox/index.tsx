@@ -25,8 +25,6 @@ const Checkbox: React.FC<ComponentInterface> = ({
     (checked ? componentStyle.checked : componentStyle.unChecked)
   ]);
 
-  console.log('componentClassName-', componentClassName);
-
   return (
     <div
       {...{

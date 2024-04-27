@@ -8,36 +8,32 @@ import {
 
 // Controller
 import {
-  getClassNames
+  useGetClassNames
 } from './controller';
 
 const Input: React.FC<ComponentInterface> = ({
   className,
   styles,
-  inputType,
-  value,
-  placeholder,
+  label,
   disabled,
-  onChange
+  onClick
 }) => {
 
-  const componentClassName: string = getClassNames([
-    componentStyle.componentInput,
+  const componentClassName: string = useGetClassNames([
+    componentStyle.componentButton,
     className
   ]);
 
   return (
-    <input
+    <button
       {...{
         className: componentClassName,
         style: styles || {},
-        type: inputType || 'text',
-        value,
-        placeholder,
+        label,
         disabled,
-        onChange
+        onClick
       }}
-    />
+    >{label}</button>
   )
 }
 
