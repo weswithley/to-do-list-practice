@@ -9,6 +9,6 @@ export interface ComponentInterface {
   className?: ClassNameType;
   styles?: StylesType;
   checked: CheckedType;
-  disabled: DisabledType;
+  disabled?: DisabledType;
   onClick: OnChangeType;
 }
