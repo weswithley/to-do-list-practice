@@ -1,0 +1,35 @@
+.componentDropdown {
+  position: relative;
+  button{
+    min-width: 100px;
+    &:after{
+      content: ' ';
+
+    }
+  }
+
+  .componentDropdownModal{
+    position: absolute;
+    margin-top: .2rem;
+    right: 0;
+    border: 1px solid #333;
+    background-color: #fff;
+
+    & ul {
+      margin: 0;
+      padding: .5rem 0;
+    }
+    & li {
+      cursor: pointer;
+      list-style: none;
+      // border-bottom: .5px solid #333;
+      padding: 0 .8rem;
+      &:hover,
+      &:focus,
+      &.active{
+        color: #fff;
+        background-color: #ccc;
+      }
+    }
+  }
+}

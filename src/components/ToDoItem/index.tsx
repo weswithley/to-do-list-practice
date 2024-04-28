@@ -24,6 +24,7 @@ const ToDoItem: React.FC<ComponentInterface> = ({
   className,
   styles,
   value,
+  createTime,
   checked,
   disabled,
   onInputChange,
@@ -59,6 +60,7 @@ const ToDoItem: React.FC<ComponentInterface> = ({
         icon={faTrash}
         onClick={onDeleteClick}
       />
+      <div>{createTime}</div>
     </div>
   )
 }

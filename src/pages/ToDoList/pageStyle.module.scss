@@ -1,0 +1,31 @@
+.toDoListContainer {
+  max-width: 968px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  .toolBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+  }
+
+  .rightToolBox {
+    display: flex;
+    gap: .5rem;
+  }
+
+  .toDoListContent {
+    .toDoItem{
+      margin: 10px auto;
+    }
+  }
+
+  .bottomToolBox {
+    display: flex;
+    margin-top: .5rem;
+    gap: .5rem;
+  }
+}
