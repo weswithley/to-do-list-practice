@@ -1,10 +1,9 @@
-import React from 'react';
+// SCSS
 import './assets/scss/global.scss';
 
-const App = () => (
-  <div className="to_to_list_container">
-    This is app.
-  </div>
-)
+// Component
+import ToDoList from './pages/ToDoList';
+
+const App = () => <ToDoList />
 
 export default App;
