@@ -1,16 +1,16 @@
 .componentButton {
-  background-color: #eee;
-  border: 1px solid #ccc;
-  color: #777;
-  min-width: 50px;
+  width: 3rem;
   padding: 7px 5px;
-  border-radius: 2px;
+  color: #777;
+  background-color: #fff;
+  border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color, .3s;
 
   &:hover{
-    background-color: #d7d7d7;
-    border: 1px solid #ccc;
-    transition: background-color, .5s;
+    color: #fff;
+    background-color: #7a9493;
+    border: 1px solid #7a9493;
+    transition: background-color, .3s;
   }
 }

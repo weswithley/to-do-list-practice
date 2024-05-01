@@ -1,4 +1,7 @@
+// Packages
 import React from 'react';
+
+// SCSS
 import componentStyle from './componentStyle.module.scss';
 
 // Type
@@ -6,34 +9,37 @@ import {
   ComponentInterface
 } from './componentTypes';
 
-// Controller
+// Hook
 import {
   useGetClassNames
-} from './controller';
+} from './hook';
 
 const Input: React.FC<ComponentInterface> = ({
   className,
   styles,
   label,
+  title,
   disabled,
   onClick
 }) => {
 
-  const componentClassName: string = useGetClassNames([
-    componentStyle.componentButton,
-    className
-  ]);
+  const getClassNames = useGetClassNames();
 
   return (
     <button
       {...{
-        className: componentClassName,
+        className: getClassNames([
+          componentStyle.componentButton,
+          className
+        ]),
         style: styles || {},
-        label,
+        title,
         disabled,
         onClick
       }}
-    >{label}</button>
+    >
+      {label}
+    </button>
   )
 }
 
