@@ -1,9 +1,11 @@
 .componentInput {
   border-color: transparent;
-  border-bottom-color: #555;
+  border-bottom: 1px solid #888;
   outline: none;
   padding: 5px;
-  font-size: 1rem;
-  color: #555;
+  color: #888;
   letter-spacing: 0.03rem;
+  &::placeholder{
+    color: #ccc;
+  }
 }
