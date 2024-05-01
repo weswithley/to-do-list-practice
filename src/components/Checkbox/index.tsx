@@ -26,7 +26,8 @@ const Checkbox: React.FC<ComponentInterface> = ({
 
   return (
     <div
-      {...{
+    {...{
+        title: 'checkbox',
         className: getClassNames([
           componentStyle.componentCheckbox,
           className,

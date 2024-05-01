@@ -40,6 +40,7 @@ const FilterSearchDropdown: React.FC<ComponentInterface> = ({
   return (
     <div className={componentStyle.componentDropdown}>
       <Button
+        title='Filtering'
         className={isOpenModal ? componentStyle.isOpen : ''}
         label={selectedFilterSearch?.value}
         disabled={!!disabled}

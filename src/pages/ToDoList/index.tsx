@@ -189,7 +189,7 @@ const ToDoList: React.FC<PageInterface> = () => {
         {/* Reset all */}
         <Button
           label={<FontAwesomeIcon icon={faTrash} />}
-          title='Reset all'
+          title='Reset'
           onClick={() => {
             localStorage.removeItem("toDoList");
             setToDoList([]);
