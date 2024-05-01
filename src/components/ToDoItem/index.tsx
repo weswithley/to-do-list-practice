@@ -57,6 +57,7 @@ const ToDoItem: React.FC<ComponentInterface> = ({
           }}
         />
         <FontAwesomeIcon
+          data-testid="delete-icon"
           icon={faXmark}
           onClick={onDeleteClick}
         />
