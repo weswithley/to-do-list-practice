@@ -1,12 +1,13 @@
 .componentCheckbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #555;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #888;
   background-color: transparent;
   transition: background-color .3s;
+  cursor: pointer;
 
   &.checked{
-    background-color: #555;
+    background-color: #7a9493;
     transition: background-color .3s;
   }
 }

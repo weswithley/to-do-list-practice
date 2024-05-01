@@ -1,8 +1,10 @@
 .toDoListContainer {
-  max-width: 968px;
+  max-width: 992px;
   width: 100%;
-  padding: 0 15px;
+  max-height: 100%;
+  padding: 30px;
   margin: 0 auto;
+  border: 1px dashed #888;
   box-sizing: border-box;
 
   .toolBox {
@@ -10,22 +12,92 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: .5rem;
-  }
 
-  .rightToolBox {
-    display: flex;
-    gap: .5rem;
+    .leftToolBox {
+      display: flex;
+      gap: .5rem;
+    }
+
+    .rightToolBox {
+      display: flex;
+      gap: .5rem;
+    }
   }
 
   .toDoListContent {
-    .toDoItem{
-      margin: 10px auto;
-    }
+    margin: 20px auto;
   }
 
   .bottomToolBox {
     display: flex;
+    justify-content: center;
     margin-top: .5rem;
     gap: .5rem;
+
+    button {
+      width: 6rem;
+    }
+  }
+}
+
+@media all and (max-width: 992px) {
+  .toDoListContainer {
+    .toolBox {
+      display: block;
+
+      .leftToolBox {
+        button {
+          width: 50%;
+          &:last-child {
+            border-top: 1px solid transparent;
+          }
+        }
+      }
+
+      .rightToolBox {
+        display: block;
+
+        button {
+          width: 100%;
+        }
+
+        input{
+          width: 100%;
+          margin: 1rem auto;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    .bottomToolBox{
+      button {
+        width: 50%;
+      }
+    }
+
+  }
+}
+
+@media all and (max-width: 480px) {
+  .toDoListContainer {
+    .toolBox {
+      .leftToolBox {
+        display: block;
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+    .bottomToolBox{
+      display: block;
+      button {
+        width: 100%;
+        &:last-child {
+          border-top: 1px solid transparent;
+        }
+      }
+    }
+
   }
 }

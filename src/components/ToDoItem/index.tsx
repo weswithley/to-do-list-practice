@@ -1,7 +1,7 @@
 // Packages
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 // SCSS
 import componentStyle from './componentStyle.module.scss';
@@ -15,16 +15,16 @@ import {
   ComponentInterface
 } from './componentTypes';
 
-// Controller
+// Hook
 import {
-  getClassNames
-} from './controller';
+  useGetClassNames
+} from './hook';
 
 const ToDoItem: React.FC<ComponentInterface> = ({
   className,
   styles,
   value,
-  createTime,
+  createTimeLocaleString,
   checked,
   disabled,
   onInputChange,
@@ -32,35 +32,36 @@ const ToDoItem: React.FC<ComponentInterface> = ({
   onDeleteClick
 }) => {
 
-  const componentClassName: string = getClassNames([
-    componentStyle.componentToDoItem,
-    className,
-    (checked ? componentStyle.checked : componentStyle.unChecked)
-  ]);
+  const getClassNames = useGetClassNames();
 
   return (
-    <div className={componentStyle.componentToDoItem}>
-      <Checkbox
-        {...{
-          checked,
-          disabled,
-          onClick: onCheckboxChange
-        }}
-      />
-      <Input
-        {...{
-          className: componentClassName,
-          style: styles || {},
-          value,
-          disabled,
-          onChange: onInputChange
-        }}
-      />
-      <FontAwesomeIcon
-        icon={faTrash}
-        onClick={onDeleteClick}
-      />
-      <div>{createTime}</div>
+    <div className={componentStyle.componentToDoItemContainer}>
+      <div className={componentStyle.componentToDoItem}>
+        <Checkbox
+          {...{
+            checked,
+            disabled,
+            onClick: onCheckboxChange
+          }}
+        />
+        <Input
+          {...{
+            className: getClassNames([
+              componentStyle.componentToDoItem,
+              className
+            ]),
+            style: styles || {},
+            value,
+            disabled,
+            onChange: onInputChange
+          }}
+        />
+        <FontAwesomeIcon
+          icon={faXmark}
+          onClick={onDeleteClick}
+        />
+      </div>
+      <div className={componentStyle.componentToDoItemCreateTime}>{createTimeLocaleString}</div>
     </div>
   )
 }

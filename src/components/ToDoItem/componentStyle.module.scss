@@ -1,11 +1,24 @@
-.componentToDoItem {
-  display: flex;
-  align-items: center;
-  flex: auto;
-  gap: .5rem;
+.componentToDoItemContainer{
+  margin: 10px auto;
+  .componentToDoItem {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    flex: auto;
+    gap: .5rem;
+    color: #888;
 
-  :global(.svg-inline--fa){
-    cursor: pointer;
-    color: #333;
+    :global(.svg-inline--fa){
+      cursor: pointer;
+    }
+  }
+
+  .componentToDoItemCreateTime{
+    text-align: right;
+    color: #ccc;
+    font-size: .8rem;
+    margin-top: 3px;
+    margin-right: 20px;
+    box-sizing: content-box;
   }
 }

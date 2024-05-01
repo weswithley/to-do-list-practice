@@ -1,4 +1,7 @@
+// Packages
 import React from 'react';
+
+// SCSS
 import componentStyle from './componentStyle.module.scss';
 
 // Type
@@ -8,8 +11,8 @@ import {
 
 // Controller
 import {
-  getClassNames
-} from './controller';
+  useGetClassNames
+} from './hook';
 
 const Checkbox: React.FC<ComponentInterface> = ({
   className,
@@ -19,16 +22,16 @@ const Checkbox: React.FC<ComponentInterface> = ({
   onClick
 }) => {
 
-  const componentClassName: string = getClassNames([
-    componentStyle.componentCheckbox,
-    className,
-    (checked ? componentStyle.checked : componentStyle.unChecked)
-  ]);
+  const getClassNames = useGetClassNames();
 
   return (
     <div
       {...{
-        className: componentClassName,
+        className: getClassNames([
+          componentStyle.componentCheckbox,
+          className,
+          (checked ? componentStyle.checked : componentStyle.unChecked)
+        ]),
         style: styles || {},
         disabled,
         onClick

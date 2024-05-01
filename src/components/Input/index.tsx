@@ -1,4 +1,7 @@
+// Packages
 import React from 'react';
+
+// SCSS
 import componentStyle from './componentStyle.module.scss';
 
 // Type
@@ -6,10 +9,10 @@ import {
   ComponentInterface
 } from './componentTypes';
 
-// Controller
+// Hook
 import {
-  getClassNames
-} from './controller';
+  useGetClassNames
+} from './hook';
 
 const Input: React.FC<ComponentInterface> = ({
   className,
@@ -21,15 +24,15 @@ const Input: React.FC<ComponentInterface> = ({
   onChange
 }) => {
 
-  const componentClassName: string = getClassNames([
-    componentStyle.componentInput,
-    className
-  ]);
+  const getClassNames = useGetClassNames();
 
   return (
     <input
       {...{
-        className: componentClassName,
+        className: getClassNames([
+          componentStyle.componentInput,
+          className
+        ]),
         style: styles || {},
         type: inputType || 'text',
         value,
