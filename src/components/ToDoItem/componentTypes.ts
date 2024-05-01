@@ -3,7 +3,7 @@ export type ClassNameType = string;
 export type StylesType = React.CSSProperties;
 
 export type ValuesType = string | number;
-export type CreateTimeType = string;
+export type CreateTimeLocaleStringType = string;
 export type CheckedType = boolean;
 export type DisabledType = boolean;
 
@@ -15,7 +15,7 @@ export interface ComponentInterface {
   className?: ClassNameType;
   styles?: StylesType;
   value: ValuesType;
-  createTime: CreateTimeType;
+  createTimeLocaleString: CreateTimeLocaleStringType;
   checked: CheckedType;
   disabled: DisabledType;
   onInputChange: OnInputChangeType;
