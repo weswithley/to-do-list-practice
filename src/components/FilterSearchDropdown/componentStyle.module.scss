@@ -1,18 +1,22 @@
 .componentDropdown {
   position: relative;
-  button{
-    min-width: 100px;
-    &:after{
-      content: ' ';
+  color: #888;
 
+  button{
+    min-width: 10rem;
+    &.isOpen{
+      color: #fff;
+      background-color: #7a9493;
     }
   }
 
   .componentDropdownModal{
     position: absolute;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: .2rem;
     right: 0;
-    border: 1px solid #333;
+    border: 1px solid #888;
     background-color: #fff;
 
     & ul {
@@ -22,13 +26,12 @@
     & li {
       cursor: pointer;
       list-style: none;
-      // border-bottom: .5px solid #333;
-      padding: 0 .8rem;
+      padding: .2rem .8rem;
       &:hover,
       &:focus,
       &.active{
         color: #fff;
-        background-color: #ccc;
+        background-color: #7a9493;
       }
     }
   }

@@ -1,4 +1,7 @@
+// Packages
 import React, { useMemo, useState, useEffect } from 'react';
+
+// SCSS
 import componentStyle from './componentStyle.module.scss';
 
 // Type
@@ -30,9 +33,14 @@ const FilterSearchDropdown: React.FC<ComponentInterface> = ({
     if (!!selectedFilterSearch) onClickCallBack(selectedFilterSearch);
   }, [selectedFilterSearch]);
 
+  useEffect(() => {
+    if (!!list) setFilterSearchList(cloneDeep(list));
+  }, [list])
+
   return (
     <div className={componentStyle.componentDropdown}>
       <Button
+        className={isOpenModal ? componentStyle.isOpen : ''}
         label={selectedFilterSearch?.value}
         disabled={!!disabled}
         onClick={() => setIsOpenModal(!isOpenModal)}
