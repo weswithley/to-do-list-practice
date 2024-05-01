@@ -1,14 +1,10 @@
-@media (prefers-reduced-motion: no-preference) {
-  .empty-dom{
-    animation: dom-animation infinite 20s linear;
-  }
+html{
+  margin: 0;
+  padding: 0;
 }
 
-@keyframes dom-animation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  margin: 0;
+  padding: 15px;
+  font-size: .9rem;
 }
