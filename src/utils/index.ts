@@ -1,3 +1,4 @@
 export const cloneDeep = (target: any) => {
-  return JSON.parse(JSON.stringify(target));
+  if(!target) return target;
+  else return JSON.parse(JSON.stringify(target));
 }
