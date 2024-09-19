@@ -1,5 +1,5 @@
 // Packages
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +15,7 @@ import {
 import {
   PageInterface,
   ToDoInterface,
-  SearchInterface,
+  SearchPayloadInterface,
   IsSortType
 } from './pageTypes';
 
@@ -34,34 +34,85 @@ import {
 
 // Hook
 import {
-  useToDoList
+  useAddToDoList,
+  useUpdateToDoList,
+  useDeletedToDoList,
+  useSearchedToDoList,
+  useGetSortedToDoList
 } from './hook';
 
 // Const
 import {
-  defaultSearch,
-  defaultFilterSearchList
+  defaultSearchPayload,
+  defaultFilterSearchList,
+  defaultUpdatedPayload,
+  defaultDeletedPayload
 } from './const';
 
 const ToDoList: React.FC<PageInterface> = () => {
-  // Hook functions
-  const {
-    getAddedToDoList,
-    getUpdatedToDoList,
-    getDeletedToDoList,
-    getSearch,
-    getSearchToDoList,
-    getFilterToDoList,
-    getSortToDoList,
-    getSortClassName
-  } = useToDoList();
-
+  // Main constant
   const savedToDoList = JSON.parse(localStorage.getItem("toDoList") as string);
   const [toDoList, setToDoList] = useState<Array<ToDoInterface>>(savedToDoList || []);
-  const [search, setSearch] = useState<SearchInterface>(cloneDeep(defaultSearch));
+
+  // Add
+  const {
+    setIsAdd,
+    addedToDoList
+  } = useAddToDoList({
+    toDoList
+  });
+
+  // Update
+  const [updatedPayload, setUpdatedPayload] = useState(cloneDeep(defaultUpdatedPayload));
+  const {
+    updatedToDoList
+  } = useUpdateToDoList(updatedPayload);
+
+  // Delete
+  const [deletedPayload, setDeletedPayload] = useState(cloneDeep(defaultDeletedPayload));
+  const {
+    deletedToDoList
+  } = useDeletedToDoList(deletedPayload);
+
+  // Search
+  const [searchPayload, setSearchPayload] = useState<SearchPayloadInterface>(cloneDeep(defaultSearchPayload));
   const [filterSearchList, setFilterSearchList] = useState<ListType>(cloneDeep(defaultFilterSearchList));
-  const [isSort, setIsSort] = useState<IsSortType>(null);
-  const sortIconName = getSortClassName(isSort);
+  const {
+    searchedToDoList
+  } = useSearchedToDoList({
+    toDoList,
+    searchPayload
+  });
+
+  // Sort
+  const {
+    isSort,
+    setIsSort,
+    sortIconClassName,
+    sortedToDoList
+  } = useGetSortedToDoList({
+    toDoList
+  });
+
+  useEffect(() => {
+    setToDoList(addedToDoList);
+  }, [addedToDoList])
+
+  useEffect(() => {
+    setToDoList(updatedToDoList);
+  }, [updatedToDoList])
+
+  useEffect(() => {
+    setToDoList(deletedToDoList);
+  }, [deletedToDoList])
+
+  useEffect(() => {
+    setToDoList(searchedToDoList);
+  }, [searchedToDoList])
+
+  useEffect(() => {
+    setToDoList(sortedToDoList);
+  }, [sortedToDoList])
 
   return (
     <div className={pageStyle.toDoListContainer}>
@@ -71,25 +122,14 @@ const ToDoList: React.FC<PageInterface> = () => {
           <Button
             label={<FontAwesomeIcon icon={faPlus} />}
             title='Add'
-            onClick={() => {
-              const clonedToDoList = getAddedToDoList({ toDoList });
-              setToDoList(clonedToDoList);
-            }}
+            onClick={() => setIsAdd(true)}
           />
 
           {/* Sort */}
           <Button
-            label={<FontAwesomeIcon icon={sortIconName} />}
+            label={<FontAwesomeIcon icon={sortIconClassName} />}
             title='Sort'
-            onClick={() => {
-              const clonedToDoList = getSortToDoList({
-                toDoList,
-                isSort: !isSort
-              });
-
-              setToDoList(clonedToDoList);
-              setIsSort(!isSort);
-            }}
+            onClick={() => setIsSort(!isSort)}
           />
         </div>
 
@@ -98,21 +138,12 @@ const ToDoList: React.FC<PageInterface> = () => {
           {/* Search */}
           <Input
             placeholder='Search'
-            value={ search.keyword }
+            value={searchPayload.keyword}
             onChange={e => {
-              const clonedSearch = getSearch({
-                search,
-                searchKey: 'keyword',
-                searchValue: e.target.value,
-              });
-
-              const searchedToDoList = getSearchToDoList({
-                toDoList,
-                keyword: clonedSearch.keyword
-              });
-
-              setSearch(clonedSearch);
-              setToDoList(searchedToDoList);
+              setSearchPayload({
+                ...cloneDeep(searchPayload),
+                keyword: e.target.value
+              })
             }}
           />
 
@@ -120,19 +151,10 @@ const ToDoList: React.FC<PageInterface> = () => {
           <FilterSearchDropdown
             list={filterSearchList}
             onClickCallBack={target => {
-              const clonedSearch = getSearch({
-                search,
-                searchKey: 'filter',
-                searchValue: target.value,
-              });
-
-              const searchedToDoList = getFilterToDoList({
-                toDoList,
-                filterKeyword: clonedSearch.filter
-              });
-
-              setSearch(clonedSearch);
-              setToDoList(searchedToDoList);
+              setSearchPayload({
+                ...cloneDeep(searchPayload),
+                filter: target.value
+              })
             }}
           />
         </div>
@@ -151,32 +173,26 @@ const ToDoList: React.FC<PageInterface> = () => {
                   checked={todoItem.checked}
                   disabled={todoItem.checked}
                   onInputChange={e => {
-                    const clonedToDoList = getUpdatedToDoList({
+                    setUpdatedPayload({
                       toDoList,
                       selectedToDoItem: todoItem,
                       updateKey: 'value',
                       updateValue: e.target.value
                     });
-
-                    setToDoList(clonedToDoList);
                   }}
                   onCheckboxChange={() => {
-                    const clonedToDoList = getUpdatedToDoList({
+                    setUpdatedPayload({
                       toDoList,
                       selectedToDoItem: todoItem,
                       updateKey: 'checked',
                       updateValue: !toDoList[todoItem.id].checked
                     });
-
-                    setToDoList(clonedToDoList);
                   }}
                   onDeleteClick={() => {
-                    const clonedToDoList = getDeletedToDoList({
+                    setDeletedPayload({
                       toDoList,
                       selectedToDoItem: todoItem
-                    });
-
-                    setToDoList(clonedToDoList);
+                    })
                   }}
                 />
               }
@@ -194,7 +210,7 @@ const ToDoList: React.FC<PageInterface> = () => {
             localStorage.removeItem("toDoList");
             setToDoList([]);
             setFilterSearchList(cloneDeep(defaultFilterSearchList));
-            setSearch(cloneDeep(defaultSearch));
+            setSearchPayload(cloneDeep(defaultSearchPayload));
             setIsSort(null);
           }}
         />

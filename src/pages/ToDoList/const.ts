@@ -1,8 +1,11 @@
 // Types
 import {
   ToDoInterface,
-  SearchInterface,
-  FilterConditionsInterfaceEnum
+  SearchPayloadInterface,
+  FilterConditionsInterface,
+  FilterConditionsInterfaceEnum,
+  UpdatedPayloadInterface,
+  DeletedPayloadInterface
  } from './pageTypes'
 
 export const defaultDateFormatParams: Intl.DateTimeFormatOptions = {
@@ -25,7 +28,19 @@ export const defaultToDoItemPayload: ToDoInterface = {
   createTimeStamp: 0
 }
 
-export const defaultSearch: SearchInterface = {
+export const defaultUpdatedPayload: UpdatedPayloadInterface = {
+  toDoList: [],
+  selectedToDoItem: null,
+  updateKey: null,
+  updateValue: null
+}
+
+export const defaultDeletedPayload: DeletedPayloadInterface = {
+  toDoList: [],
+  selectedToDoItem: null
+}
+
+export const defaultSearchPayload: SearchPayloadInterface = {
   keyword: '',
   filter: ''
 }
@@ -35,3 +50,9 @@ export const defaultFilterSearchList: Array<FilterConditionsInterfaceEnum> = [
   { label: 'Completed', value: 'Completed', isActive: false },
   { label: 'UnCompleted', value: 'UnCompleted', isActive: false }
 ]
+
+export const defaultFilterConditions: FilterConditionsInterface = {
+  [defaultFilterSearchList[0].value]: (target: ToDoInterface) => true,
+  [defaultFilterSearchList[1].value]: (target: ToDoInterface) => !!target.checked,
+  [defaultFilterSearchList[2].value]: (target: ToDoInterface) => !target.checked
+}
